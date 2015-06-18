@@ -1,7 +1,15 @@
 #!/bin/bash
 
+# N.B. meteor is supported only in bundled form, which makes it equal to nodejs
+if [ "$1" != "full" ] && [ "$1" != "ruby" ] && [ "$1" != "nodejs" ] && [ "$1" != "python" ] 
+then
+	echo "Usage: build <flavor> (where <flavor> = full, ruby, nodejs, python)"
+	exit
+else
+	FLAVOR=$1
+fi
+
 VERSION=0.1
-FLAVOR=ruby
 BUILDPATH=/imgbuild
 OUTFILE=.$BUILDPATH/generated_main_installer.sh
 
@@ -15,6 +23,14 @@ chmod a+x $OUTFILE
 
 install "install_my_init.sh"
 install "install_nginx_passenger.sh"
-install "install_rubyapp_utils.sh"
 
-sudo docker build -t phusion/passenger_${FLAVOR}_redhat:${VERSION} .
+if [ $FLAVOR == "full" ]
+then
+	install "install_rubyapp_utils.sh"
+	install "install_nodejsapp_utils.sh"
+	install "install_pythonapp_utils.sh"
+else
+	install "install_${FLAVOR}app_utils.sh"
+fi
+
+sudo docker build -t phusion/passenger-redhat-${FLAVOR}:${VERSION} .
