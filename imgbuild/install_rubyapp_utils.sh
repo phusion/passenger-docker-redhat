@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 # no docs/ref impl for gem (and bundle command that the user can run)
 echo "gem: --no-rdoc --no-ri" > ~/.gemrc
 

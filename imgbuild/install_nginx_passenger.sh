@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 yum install -y epel-release pygpgme curl
 curl --fail -sSLo /etc/yum.repos.d/passenger.repo https://oss-binaries.phusionpassenger.com/yum/definitions/el-passenger.repo
 
