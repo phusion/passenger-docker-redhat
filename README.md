@@ -112,10 +112,10 @@ Having a look at the logs is usually very helpful:
 As long as the container is running, you can also exec commands on it, such as the following: 
 
 	# To see if passenger is running
-	docker exec -t -i appcontainer passenger-status
+	docker exec -it appcontainer passenger-status
 	
 	# A console for looking around inside the running container
-	docker exec -t -i appcontainer bash -l
+	docker exec -it appcontainer bash -l
 
 A common issue is that Passenger does not recognize the webapp. Make sure you either have the file Passenger expects or [configure an alternative filename](https://www.phusionpassenger.com/documentation/Users%20guide%20Nginx.html#PassengerStartupFile):
 
@@ -129,7 +129,7 @@ Python | passenger_wsgi.py (e.g. containing `from app import MyApp as applicatio
 If the container doesn't start at all, you can have a look inside with bash (e.g. run `nginx` in the console to see if that throws an error):
 
 	# Run a temporary container (changes will be lost) to peek inside
-	docker run --rm -t -i you/app:0.1 my_init --skip-runit -- bash -l
+	docker run --rm -it you/app:0.1 my_init --skip-runit -- bash -l
 
 Finally, there is a [discussion forum](https://groups.google.com/d/forum/passenger-docker) where others might be able to help you.
 
