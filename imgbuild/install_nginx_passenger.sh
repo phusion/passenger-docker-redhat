@@ -13,3 +13,7 @@ cp /imgbuild/resources/nginx.conf /etc/nginx/
 cp /imgbuild/resources/passenger.conf /etc/nginx/conf.d/
 mkdir -p /etc/nginx/main.d
 cp /imgbuild/resources/nginx_main.conf /etc/nginx/main.d/
+
+# redirect logs to std*, as is customary on Docker
+ln -sf /dev/stdout /var/log/nginx/access.log
+ln -sf /dev/stderr /var/log/nginx/error.log

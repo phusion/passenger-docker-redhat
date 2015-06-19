@@ -106,7 +106,10 @@ And browse to that address: http://10.3.0.78/
 
 As long as the container is running, you can exec commands on it such as the following: 
 
-	# Command to see if passenger is running
+	# For log inspection (use -f to keep following)
+	docker logs appcontainer
+
+	# To see if passenger is running
 	docker exec -t -i appcontainer passenger-status
 	
 	# A console for looking around inside the running container
@@ -121,11 +124,10 @@ Node.js  | app.js
 Meteor | app.js (in this readme we configured it to main.js)
 Python | passenger_wsgi.py (e.g. containing `from app import MyApp as application`)
 
-Error logs can be found in `/var/log/nginx/error.log`.
-	
-If the container doesn't start at all, you can have a look inside with bash (run `nginx` in the console to see if that throws an error):
+If the container doesn't start at all, you can have a look inside with bash (e.g. run `nginx` in the console to see if that throws an error):
 
-	docker run -t -i you/app:0.1 my_init --skip-runit -- bash -l
+	# Run a temporary container (changes will be lost) to peek inside
+	docker run --rm -t -i you/app:0.1 my_init --skip-runit -- bash -l
 
 Finally, there is a [discussion forum](https://groups.google.com/d/forum/passenger-docker) where others might be able to help you.
 
