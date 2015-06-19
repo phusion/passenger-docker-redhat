@@ -104,10 +104,12 @@ And browse to that address: http://10.3.0.78/
 
 ## Troubleshooting
 
-As long as the container is running, you can exec commands on it such as the following: 
+Having a look at the logs is usually very helpful:
 
 	# For log inspection (use -f to keep following)
 	docker logs appcontainer
+
+As long as the container is running, you can also exec commands on it, such as the following: 
 
 	# To see if passenger is running
 	docker exec -t -i appcontainer passenger-status
